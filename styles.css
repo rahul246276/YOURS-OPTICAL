@@ -2556,6 +2556,95 @@ img {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-slide {
+        width: 100%;
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-content {
+        padding: var(--space-4);
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: var(--text-2xl);
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: var(--text-sm);
+        margin-bottom: var(--space-2);
+    }
+    
+    .hero-description {
+        font-size: var(--text-base);
+        line-height: 1.4;
+        margin-bottom: var(--space-4);
+    }
+    
+    .btn-hero {
+        font-size: var(--text-sm);
+        padding: 12px 24px;
+    }
+    
+    .hero-nav-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .hero-nav-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .hero-indicators {
+        bottom: 20px;
+    }
+    
+    .indicator {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .navbar {
+        padding: 15px 20px;
+    }
+    
+    .nav-logo a {
+        font-size: var(--text-lg);
+    }
+    
+    .nav-link {
+        font-size: var(--text-sm);
+        padding: 10px 15px;
+    }
+    
+    .btn-nav {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .glasses-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-4);
+    }
+    
     .page-header {
         padding: 150px 0 70px;
         background-attachment: scroll;
