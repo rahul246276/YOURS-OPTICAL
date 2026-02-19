@@ -135,11 +135,12 @@ p {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(8px);
+    right: 0;
     z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--neutral-200);
+    transition: all 0.3s ease;
 }
 
 .nav-container {
@@ -150,6 +151,7 @@ p {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--space-4);
+    position: relative;
 }
 
 .nav-logo a {
@@ -247,6 +249,41 @@ p {
 
 .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Menu Active States */
+.nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    box-shadow: var(--shadow-medium);
+    padding: var(--space-4);
+    border-radius: 0 0 16px 16px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+.nav-menu.active .nav-link {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--neutral-200);
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.nav-menu.active .nav-link:last-child {
+    border-bottom: none;
+}
+
+.nav-menu.active .nav-link:hover {
+    color: var(--secondary);
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding-left: 15px;
 }
 
 /* ===== HERO SECTION ===== */
@@ -1502,11 +1539,66 @@ p {
     animation: fadeIn 1s ease forwards;
 }
 
-/* ===== PERFORMANCE & ACCESSIBILITY ===== */
-img {
-    loading: lazy;
-    decoding: async;
+/* ===== TRUST BADGES SECTION ===== */
+.trust-badges {
+    padding: var(--space-8) 0;
+    background: var(--neutral-100);
 }
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow-subtle);
+    transition: var(--transition-base);
+    border: 1px solid var(--neutral-200);
+}
+
+.trust-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--secondary);
+}
+
+.trust-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--secondary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.trust-content h4 {
+    font-size: var(--text-lg);
+    color: var(--primary);
+    margin-bottom: var(--space-1);
+    font-weight: 600;
+}
+
+.trust-content p {
+    font-size: var(--text-sm);
+    color: var(--neutral-600);
+    margin: 0;
+}
+
+/* ===== PERFORMANCE & ACCESSIBILITY ===== */
+/* Note: loading="lazy" and decoding="async" should be HTML attributes, not CSS */
 
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -1812,7 +1904,7 @@ img {
 }
 
 .glass-card:hover .glass-image img {
-    transform: scale(1.1);
+    transform: scale(1.0.5);
 }
 
 .glass-details {
@@ -2556,41 +2648,32 @@ img {
 }
 
 @media (max-width: 768px) {
-    .hero {
-        height: 60vh;
-        min-height: 400px;
+    .header-description {
+        font-size: var(--text-lg);
+        padding: 0 var(--space-4);
     }
     
-    .hero-slide {
-        width: 100%;
-        height: 60vh;
-        min-height: 400px;
+    .header-eyebrow {
+        font-size: 10px;
+        padding: 6px 16px;
     }
     
-    .hero-content {
-        padding: var(--space-4);
-        text-align: center;
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    .hero-title {
-        font-size: var(--text-2xl);
-        line-height: 1.2;
+    .services-grid {
+        grid-template-columns: 1fr;
     }
     
-    .hero-subtitle {
-        font-size: var(--text-sm);
-        margin-bottom: var(--space-2);
+    .filter-buttons,
+    .filter-container {
+        gap: var(--space-2);
     }
     
-    .hero-description {
-        font-size: var(--text-base);
-        line-height: 1.4;
-        margin-bottom: var(--space-4);
-    }
-    
-    .btn-hero {
-        font-size: var(--text-sm);
-        padding: 12px 24px;
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: var(--text-xs);
     }
     
     .hero-nav-btn {
@@ -2648,39 +2731,6 @@ img {
     .page-header {
         padding: 150px 0 70px;
         background-attachment: scroll;
-    }
-    
-    .header-title {
-        font-size: var(--text-4xl);
-        line-height: 1.1;
-    }
-    
-    .header-description {
-        font-size: var(--text-lg);
-        padding: 0 var(--space-4);
-    }
-    
-    .header-eyebrow {
-        font-size: 10px;
-        padding: 6px 16px;
-    }
-    
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .filter-buttons,
-    .filter-container {
-        gap: var(--space-2);
-    }
-    
-    .filter-btn {
-        padding: 8px 16px;
-        font-size: var(--text-xs);
     }
 }
 
