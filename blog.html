@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal | YOURS OPTICAL | Luxury Eyewear Insights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Blog Page Specific Styles */
+        .blog-hero {
+            height: 60vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('Images/Image 21.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 90px;
+            position: relative;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: var(--space-4);
+        }
+
+        .blog-hero-subtitle {
+            display: block;
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: var(--space-2);
+        }
+
+        .blog-hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            margin-bottom: var(--space-3);
+            color: var(--white);
+        }
+
+        .blog-hero-description {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+            margin-bottom: var(--space-4);
+            color: var(--white);
+        }
+
+        .blog-categories {
+            padding: var(--space-6) 0;
+            background: var(--pearl);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: var(--space-2) var(--space-4);
+            background: var(--white);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 25px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .featured-post {
+            padding: var(--space-10) 0;
+            background: var(--white);
+        }
+
+        .featured-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            align-items: center;
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+            transition: all var(--transition-base);
+        }
+
+        .featured-article:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-image {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .featured-article:hover .featured-image img {
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-4);
+            background: var(--gold);
+            color: var(--white);
+            padding: var(--space-2) var(--space-3);
+            border-radius: 4px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .featured-content {
+            padding: var(--space-8);
+        }
+
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+            font-size: var(--text-sm);
+            color: var(--dark-gray);
+        }
+
+        .featured-date,
+        .featured-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .featured-category {
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .featured-title {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+            color: var(--black);
+            line-height: 1.2;
+        }
+
+        .featured-excerpt {
+            font-size: var(--text-lg);
+            line-height: 1.8;
+            margin-bottom: var(--space-5);
+            color: var(--dark-gray);
+        }
+
+        .blog-grid {
+            padding: var(--space-10) 0;
+            background: var(--pearl);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .article-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.1);
+        }
+
+        .article-category {
+            position: absolute;
+            top: var(--space-3);
+            left: var(--space-3);
+            background: var(--gold);
+            color: var(--white);
+            padding: var(--space-1) var(--space-2);
+            border-radius: 4px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .article-content {
+            padding: var(--space-5);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+            font-size: var(--text-xs);
+            color: var(--dark-gray);
+        }
+
+        .article-date,
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .article-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-3);
+            color: var(--black);
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            font-size: var(--text-base);
+            line-height: 1.6;
+            margin-bottom: var(--space-4);
+            color: var(--dark-gray);
+        }
+
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--gold);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all var(--transition-base);
+        }
+
+        .article-link:hover {
+            gap: var(--space-3);
+            color: var(--black);
+        }
+
+        .newsletter-section {
+            padding: var(--space-10) 0;
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-title {
+            font-size: var(--text-3xl);
+            margin-bottom: var(--space-3);
+            color: var(--white);
+        }
+
+        .newsletter-description {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-5);
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-3);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-3);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: var(--text-base);
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-btn {
+            padding: var(--space-3) var(--space-5);
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .pagination {
+            padding: var(--space-6) 0;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: all var(--transition-base);
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                height: 300px;
+            }
+
+            .featured-content {
+                padding: var(--space-6);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero {
+                height: 50vh;
+                min-height: 400px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-filters {
+                gap: var(--space-2);
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .featured-title {
+                font-size: var(--text-2xl);
+            }
+
+            .article-title {
+                font-size: var(--text-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">YOURS OPTICAL</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Collection</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="appointment.html" class="btn-nav">Book Consultation</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <span class="blog-hero-subtitle">Insights & Inspiration</span>
+            <h1 class="blog-hero-title">The Journal</h1>
+            <p class="blog-hero-description">Discover the latest trends in luxury eyewear, expert insights, and the art of vision care.</p>
+        </div>
+    </section>
+
+    <!-- Blog Categories -->
+    <section class="blog-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="category-btn active">All Articles</button>
+                <button class="category-btn">Eyewear Trends</button>
+                <button class="category-btn">Eye Health</button>
+                <button class="category-btn">Style Guide</button>
+                <button class="category-btn">Craftsmanship</button>
+                <button class="category-btn">Brand Stories</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="featured-post">
+        <div class="container">
+            <div class="featured-article">
+                <div class="featured-image">
+                    <img src="Images/Image 8.jpg" alt="Featured Article">
+                    <span class="featured-badge">Featured</span>
+                </div>
+                <div class="featured-content">
+                    <div class="featured-meta">
+                        <span class="featured-date">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                            February 15, 2024
+                        </span>
+                        <span class="featured-author">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            Founder
+                        </span>
+                        <span class="featured-category">Craftsmanship</span>
+                    </div>
+                    <h2 class="featured-title">The Art of Japanese Titanium: Why It's the Premium Choice for Luxury Eyewear</h2>
+                    <p class="featured-excerpt">Explore the remarkable properties of Japanese titanium that make it the preferred material for luxury eyewear. From its exceptional strength-to-weight ratio to its hypoallergenic properties, discover why master craftsmen choose this premium material for creating frames that combine durability with elegance.</p>
+                    <a href="#" class="article-link">
+                        Read Full Article
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"/>
+                            <polyline points="7 7 17 7 17 17"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-grid">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Latest Articles</span>
+                <h2 class="section-title">Explore Our Insights</h2>
+                <p class="section-description">Expert perspectives on luxury eyewear and vision care</p>
+            </div>
+            <div class="articles-grid">
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="Images/Image 1.jpg" alt="Blue Light Protection">
+                        <span class="article-category">Eye Health</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date">Feb 12, 2024</span>
+                            <span class="article-author">Dr. Sarah Johnson</span>
+                        </div>
+                        <h3 class="article-title">Digital Eye Strain: The Complete Guide to Blue Light Protection</h3>
+                        <p class="article-excerpt">Learn how blue light affects your vision and discover the best lens options for protecting your eyes in our digital world.</p>
+                        <a href="#" class="article-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="7" y1="17" x2="17" y2="7"/>
+                                <polyline points="7 7 17 7 17 17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="Images/Image 2.jpg" alt="Face Shape Guide">
+                        <span class="article-category">Style Guide</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date">Feb 10, 2024</span>
+                            <span class="article-author">Michael Chen</span>
+                        </div>
+                        <h3 class="article-title">Finding Your Perfect Match: A Guide to Face Shapes and Frame Styles</h3>
+                        <p class="article-excerpt">Discover how to choose eyewear that complements your unique facial features with our expert styling guide.</p>
+                        <a href="#" class="article-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="7" y1="17" x2="17" y2="7"/>
+                                <polyline points="7 7 17 7 17 17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="Images/Image 3.jpg" alt="Sunglasses Trends">
+                        <span class="article-category">Eyewear Trends</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date">Feb 8, 2024</span>
+                            <span class="article-author">Emily Rodriguez</span>
+                        </div>
+                        <h3 class="article-title">2024 Sunglasses Trends: What's Hot in Luxury Eyewear</h3>
+                        <p class="article-excerpt">Explore the latest sunglasses trends shaping the luxury eyewear market this season, from vintage-inspired designs to modern minimalist frames.</p>
+                        <a href="#" class="article-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="7" y1="17" x2="17" y2="7"/>
+                                <polyline points="7 7 17 7 17 17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="Images/Image 4.jpg" alt="Lens Technology">
+                        <span class="article-category">Technology</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date">Feb 5, 2024</span>
+                            <span class="article-author">Dr. Sarah Johnson</span>
+                        </div>
+                        <h3 class="article-title">Progressive Lenses: The Ultimate Guide to Seamless Vision</h3>
+                        <p class="article-excerpt">Understanding progressive lens technology and how it can provide natural vision correction for all distances.</p>
+                        <a href="#" class="article-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="7" y1="17" x2="17" y2="7"/>
+                                <polyline points="7 7 17 7 17 17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="Images/Image 5.jpg" alt="Vintage Eyewear">
+                        <span class="article-category">Brand Stories</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date">Feb 3, 2024</span>
+                            <span class="article-author">Founder</span>
+                        </div>
+                        <h3 class="article-title">The Renaissance of Vintage Eyewear: Timeless Styles Reimagined</h3>
+                        <p class="article-excerpt">How classic designs from the golden age of eyewear are inspiring modern luxury collections with contemporary twists.</p>
+                        <a href="#" class="article-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="7" y1="17" x2="17" y2="7"/>
+                                <polyline points="7 7 17 7 17 17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="Images/Image 6.jpg" alt="Eyewear Care">
+                        <span class="article-category">Care Tips</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date">Feb 1, 2024</span>
+                            <span class="article-author">Emily Rodriguez</span>
+                        </div>
+                        <h3 class="article-title">Luxury Eyewear Care: Professional Tips for Maintaining Your Investment</h3>
+                        <p class="article-excerpt">Essential care techniques to keep your premium eyewear in pristine condition for years to come.</p>
+                        <a href="#" class="article-link">
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="7" y1="17" x2="17" y2="7"/>
+                                <polyline points="7 7 17 7 17 17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">Stay Inspired</h2>
+                <p class="newsletter-description">Get the latest insights on luxury eyewear, eye health tips, and exclusive offers delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address">
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pagination -->
+    <section class="pagination">
+        <div class="container">
+            <a href="#" class="page-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </a>
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <a href="#" class="page-btn">...</a>
+            <a href="#" class="page-btn">8</a>
+            <a href="#" class="page-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>YOURS</h3>
+                    <p>Luxury eyewear atelier since 1985. Crafting visions with precision and passion.</p>
+                    <div class="footer-newsletter">
+                        <p>Subscribe to our newsletter</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">→</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="shop.html">Collection</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="blog.html">Journal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="about.html">Heritage</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="appointment.html">Consultation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Visit Us</h4>
+                    <p>27, Ratan Sarkar Garden St, Raja Katra, Bara Bazar, Jorasanko, Kolkata, West Bengal 700007</p>
+                    <p>+91 82405 02714</p>
+                    <p><a href="mailto:yoursoptical1@gmail.com">yoursoptical1@gmail.com</a></p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 YOURS OPTICAL. All rights reserved. | Website Design & Developed by <a href="https://anrasolutions.com/" target="_blank" style="color: var(--secondary); text-decoration: none;">Anra Solutions Pvt. Ltd.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

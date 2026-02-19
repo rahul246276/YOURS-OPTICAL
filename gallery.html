@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - YOURS OPTICAL | Luxury Eyewear Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Gallery Specific Styles */
+        .gallery-hero {
+            height: 60vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('Images/Image 19.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 90px;
+        }
+
+        .gallery-hero-content {
+            max-width: 800px;
+            padding: var(--space-4);
+        }
+
+        .gallery-hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            margin-bottom: var(--space-3);
+            color: var(--white);
+        }
+
+        .gallery-hero-description {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+            margin-bottom: var(--space-4);
+            color: var(--white);
+        }
+
+        .gallery-filters {
+            background: var(--pearl);
+            padding: var(--space-4) 0;
+            position: sticky;
+            top: 90px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-2) var(--space-4);
+            background: transparent;
+            border: 1px solid var(--graphite);
+            color: var(--graphite);
+            font-size: var(--text-sm);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border-radius: 25px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        .gallery-main {
+            padding: var(--space-8) 0;
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--shadow-subtle);
+            transition: all var(--transition-base);
+            cursor: pointer;
+            background: var(--white);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-4);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-category {
+            display: block;
+            font-size: var(--text-xs);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: var(--space-1);
+        }
+
+        .gallery-title {
+            font-size: var(--text-xl);
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: var(--space-1);
+        }
+
+        .gallery-description {
+            font-size: var(--text-sm);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+        }
+
+        .gallery-featured {
+            margin-bottom: var(--space-8);
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--space-3);
+            height: 600px;
+        }
+
+        .featured-main {
+            grid-row: span 2;
+        }
+
+        .featured-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .featured-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .featured-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .featured-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-4);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .featured-item:hover .featured-overlay {
+            opacity: 1;
+        }
+
+        .gallery-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: var(--space-6);
+            background: var(--pearl);
+            border-radius: 8px;
+            transition: all var(--transition-base);
+        }
+
+        .stat-card:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: var(--text-4xl);
+            font-weight: 300;
+            margin-bottom: var(--space-2);
+            color: var(--gold);
+        }
+
+        .stat-card:hover .stat-number {
+            color: var(--white);
+        }
+
+        .stat-label {
+            font-size: var(--text-sm);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--graphite);
+        }
+
+        .stat-card:hover .stat-label {
+            color: var(--white);
+        }
+
+        /* Responsive Gallery */
+        @media (max-width: 992px) {
+            .featured-grid {
+                grid-template-columns: 1fr 1fr;
+                height: auto;
+            }
+
+            .featured-main {
+                grid-column: span 2;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: var(--space-3);
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-main {
+                grid-column: span 1;
+                height: 300px;
+            }
+
+            .gallery-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">YOURS OPTICAL</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Collection</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="appointment.html" class="btn-nav">Book Consultation</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="gallery-hero-content">
+            <span class="hero-subtitle">Visual Excellence</span>
+            <h1 class="gallery-hero-title">Our Gallery</h1>
+            <p class="gallery-hero-description">Explore our curated collection of premium eyewear masterpieces, where each frame tells a story of craftsmanship and elegance.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filters -->
+    <section class="gallery-filters">
+        <div class="container">
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All Collections</button>
+                <button class="filter-btn" data-filter="premium">Premium</button>
+                <button class="filter-btn" data-filter="classic">Classic</button>
+                <button class="filter-btn" data-filter="modern">Modern</button>
+                <button class="filter-btn" data-filter="sunglasses">Sunglasses</button>
+                <button class="filter-btn" data-filter="optical">Optical</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Stats -->
+    <section class="gallery-main">
+        <div class="container">
+            <div class="gallery-stats">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Premium Frames</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Luxury Brands</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">35+</div>
+                    <div class="stat-label">Years Heritage</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10k+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Gallery -->
+    <section class="gallery-featured">
+        <div class="container">
+            <div class="featured-grid">
+                <div class="featured-item featured-main" data-category="premium">
+                    <img src="Images/Image 23.jpg" alt="Premium Collection">
+                    <div class="featured-overlay">
+                        <span class="gallery-category">Premium Collection</span>
+                        <h3 class="gallery-title">Heritage Series</h3>
+                        <p class="gallery-description">Timeless elegance meets modern sophistication</p>
+                    </div>
+                </div>
+                <div class="featured-item" data-category="sunglasses">
+                    <img src="Images/Image 7.jpg" alt="Aviator Collection">
+                    <div class="featured-overlay">
+                        <span class="gallery-category">Sunglasses</span>
+                        <h3 class="gallery-title">Aviator Elite</h3>
+                        <p class="gallery-description">Classic design reimagined</p>
+                    </div>
+                </div>
+                <div class="featured-item" data-category="modern">
+                    <img src="Images/Image 2.jpg" alt="Modern Collection">
+                    <div class="featured-overlay">
+                        <span class="gallery-category">Modern</span>
+                        <h3 class="gallery-title">Urban Edge</h3>
+                        <p class="gallery-description">Contemporary style statement</p>
+                    </div>
+                </div>
+                <div class="featured-item" data-category="classic">
+                    <img src="Images/Image 1.jpg" alt="Classic Collection">
+                    <div class="featured-overlay">
+                        <span class="gallery-category">Classic</span>
+                        <h3 class="gallery-title">Timeless Pieces</h3>
+                        <p class="gallery-description">Traditional craftsmanship</p>
+                    </div>
+                </div>
+                <div class="featured-item" data-category="optical">
+                    <img src="Images/Image 8.jpg" alt="Optical Collection">
+                    <div class="featured-overlay">
+                        <span class="gallery-category">Optical</span>
+                        <h3 class="gallery-title">Blue Light Pro</h3>
+                        <p class="gallery-description">Digital eye protection</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Gallery Grid -->
+    <section class="gallery-main">
+        <div class="container">
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="premium">
+                    <img src="Images/Image 3.jpg" alt="Vintage Luxury" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Premium</span>
+                        <h3 class="gallery-title">Vintage Luxury</h3>
+                        <p class="gallery-description">Retro-inspired frames with modern comfort</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="sunglasses">
+                    <img src="Images/Image 4.jpg" alt="Sport Elite" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Sunglasses</span>
+                        <h3 class="gallery-title">Sport Elite</h3>
+                        <p class="gallery-description">High-performance athletic eyewear</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="classic">
+                    <img src="Images/Image 5.jpg" alt="Heritage Classic" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Classic</span>
+                        <h3 class="gallery-title">Heritage Classic</h3>
+                        <p class="gallery-description">Traditional designs, modern materials</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="modern">
+                    <img src="Images/Image 6.jpg" alt="Geometric Modern" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Modern</span>
+                        <h3 class="gallery-title">Geometric Modern</h3>
+                        <p class="gallery-description">Bold architectural designs</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="optical">
+                    <img src="Images/Image 9.jpg" alt="Reading Comfort" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Optical</span>
+                        <h3 class="gallery-title">Reading Comfort</h3>
+                        <p class="gallery-description">Designed for extended wear</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="premium">
+                    <img src="Images/Image 10.jpg" alt="Designer Exclusive" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Premium</span>
+                        <h3 class="gallery-title">Designer Exclusive</h3>
+                        <p class="gallery-description">Limited edition masterpieces</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="sunglasses">
+                    <img src="Images/Image 11.jpg" alt="Polarized Pro" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Sunglasses</span>
+                        <h3 class="gallery-title">Polarized Pro</h3>
+                        <p class="gallery-description">Superior glare protection</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="classic">
+                    <img src="Images/Image 12.jpg" alt="Executive Style" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Classic</span>
+                        <h3 class="gallery-title">Executive Style</h3>
+                        <p class="gallery-description">Professional elegance</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="modern">
+                    <img src="Images/Image 17.jpg" alt="Minimalist Design" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Modern</span>
+                        <h3 class="gallery-title">Minimalist Design</h3>
+                        <p class="gallery-description">Clean lines, pure style</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Gallery Section -->
+    <section class="instagram">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">@yoursoptical</span>
+                <h2 class="section-title">Follow Our Story</h2>
+                <p class="section-description">Share your moments with #YoursMoments</p>
+            </div>
+            <div class="instagram-grid">
+                <div class="insta-item">
+                    <img src="Images/Image 1.jpg" alt="Instagram 1" class="gallery-image">
+                </div>
+                <div class="insta-item">
+                    <img src="Images/Image 2.jpg" alt="Instagram 2" class="gallery-image">
+                </div>
+                <div class="insta-item">
+                    <img src="Images/Image 3.jpg" alt="Instagram 3" class="gallery-image">
+                </div>
+                <div class="insta-item">
+                    <img src="Images/Image 4.jpg" alt="Instagram 4" class="gallery-image">
+                </div>
+                <div class="insta-item">
+                    <img src="Images/Image 5.jpg" alt="Instagram 5" class="gallery-image">
+                </div>
+                <div class="insta-item">
+                    <img src="Images/Image 6.jpg" alt="Instagram 6" class="gallery-image">
+                </div>
+            </div>
+            <div class="instagram-cta">
+                <a href="https://instagram.com" target="_blank" class="btn-instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                    Follow @yoursoptical
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>YOURS</h3>
+                    <p>Luxury eyewear atelier since 1985. Crafting visions with precision and passion.</p>
+                    <div class="footer-newsletter">
+                        <p>Subscribe to our newsletter</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">→</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="shop.html">Collection</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="blog.html">Journal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="about.html">Heritage</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="appointment.html">Consultation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Visit Us</h4>
+                    <p>27, Ratan Sarkar Garden St, Raja Katra, Bara Bazar, Jorasanko, Kolkata, West Bengal 700007</p>
+                    <p>+91 82405 02714</p>
+                    <p><a href="mailto:yoursoptical1@gmail.com">yoursoptical1@gmail.com</a></p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 YOURS OPTICAL. All rights reserved. | Website Design & Developed by <a href="https://anrasolutions.com/" target="_blank" style="color: var(--secondary); text-decoration: none;">Anra Solutions Pvt. Ltd.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
+    <script>
+        // Gallery Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item, .featured-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const filter = this.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, 10);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Add transition styles to gallery items
+            galleryItems.forEach(item => {
+                item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            });
+        });
+    </script>
+</body>
+</html>

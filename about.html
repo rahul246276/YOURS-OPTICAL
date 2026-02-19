@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Heritage | YOURS OPTICAL | Luxury Eyewear Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_addon.css">
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            height: 70vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('Images/Image 20.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 90px;
+            position: relative;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: var(--space-4);
+        }
+
+        .about-hero-subtitle {
+            display: block;
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: var(--space-2);
+        }
+
+        .about-hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            margin-bottom: var(--space-3);
+            color: var(--white);
+        }
+
+        .about-hero-description {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+            margin-bottom: var(--space-4);
+            color: var(--white);
+        }
+
+        .brand-story {
+            padding: var(--space-10) 0;
+            background: var(--white);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            align-items: center;
+        }
+
+        .story-text .lead {
+            font-size: var(--text-xl);
+            font-family: var(--font-display);
+            color: var(--black);
+            margin-bottom: var(--space-4);
+        }
+
+        .story-text p {
+            margin-bottom: var(--space-4);
+            line-height: 1.8;
+        }
+
+        .story-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .timeline-section {
+            padding: var(--space-8) 0;
+            background: var(--pearl);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gold);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--space-8);
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: var(--space-6);
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            margin: 0 var(--space-6);
+            transition: all var(--transition-base);
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border: 4px solid var(--white);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--pearl);
+        }
+
+        .timeline-year {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: var(--space-2);
+        }
+
+        .mission-vision {
+            padding: var(--space-8) 0;
+            background: var(--pearl);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .mission-card {
+            background: var(--white);
+            padding: var(--space-6);
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            text-align: center;
+            transition: all var(--transition-base);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .mission-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .mission-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-4);
+            background: var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            transition: all var(--transition-base);
+        }
+
+        .mission-card:hover .mission-icon {
+            background: var(--gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .mission-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .mission-card h3 {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-3);
+            color: var(--black);
+        }
+
+        .values-section {
+            padding: var(--space-8) 0;
+            background: var(--white);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .value-card {
+            background: var(--white);
+            padding: var(--space-6);
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            text-align: center;
+            transition: all var(--transition-base);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform var(--transition-base);
+        }
+
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .value-card h3 {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-3);
+            color: var(--gold);
+        }
+
+        .store-experience {
+            padding: var(--space-8) 0;
+            background: var(--pearl);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            align-items: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: var(--space-3);
+            height: 400px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: all var(--transition-base);
+        }
+
+        .gallery-item.large {
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .experience-features {
+            margin-top: var(--space-5);
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+            padding: var(--space-3);
+            background: var(--white);
+            border-radius: 8px;
+            transition: all var(--transition-base);
+        }
+
+        .feature:hover {
+            background: var(--gold-light);
+            transform: translateX(8px);
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .team-section {
+            padding: var(--space-8) 0;
+            background: var(--white);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .team-member {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: all var(--transition-base);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .member-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-info {
+            padding: var(--space-5);
+            text-align: center;
+        }
+
+        .member-info h3 {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-2);
+            color: var(--black);
+        }
+
+        .position {
+            display: block;
+            font-size: var(--text-sm);
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-3);
+        }
+
+        .stats-section {
+            padding: var(--space-8) 0;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-6);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all var(--transition-base);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:hover {
+            background: var(--gold);
+            transform: translateY(-8px);
+        }
+
+        .stat-number {
+            font-size: var(--text-4xl);
+            font-weight: 300;
+            margin-bottom: var(--space-2);
+            color: var(--gold);
+            transition: color var(--transition-base);
+        }
+
+        .stat-item:hover .stat-number {
+            color: var(--white);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .story-grid,
+            .experience-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-6);
+            }
+
+            .gallery-grid {
+                height: 300px;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+                margin-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                height: 50vh;
+                min-height: 400px;
+            }
+
+            .mission-grid,
+            .values-grid,
+            .team-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                height: auto;
+            }
+
+            .gallery-item.large {
+                grid-row: span 1;
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.large {
+                grid-column: span 1;
+            }
+
+            .timeline-item {
+                margin-left: 40px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">YOURS OPTICAL</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Collection</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="appointment.html" class="btn-nav">Book Consultation</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <span class="about-hero-subtitle">Since 1985</span>
+            <h1 class="about-hero-title">Our Heritage</h1>
+            <p class="about-hero-description">A legacy of excellence in luxury eyewear, crafting visions with precision and passion for over three decades.</p>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="brand-story">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-text">
+                    <span class="section-eyebrow">The Beginning</span>
+                    <h2 class="section-title">A Vision of Excellence</h2>
+                    <p class="lead">Founded in 1985 by a master optician with an unwavering passion for perfection.</p>
+                    <p>What began as a small family-owned optical shop in the heart of Kolkata has blossomed into a premier destination for luxury eyewear. Our philosophy was elegantly simple: every pair of glasses should be a masterpiece of craftsmanship, combining optical precision with artistic beauty.</p>
+                    <p>Over the decades, we have remained true to this founding vision. We traverse the globe to source the finest materials—Japanese titanium, Italian acetate, German optical glass—and collaborate with master artisans who share our relentless commitment to excellence.</p>
+                    <p>Today, Yours Optical stands as a testament to our unwavering dedication to quality, innovation, and personalized service. We continue to curate the world's finest eyewear collections while maintaining the intimate, client-focused experience that has been our hallmark since day one.</p>
+                </div>
+                <div class="story-image">
+                    <img src="Images/Image 8.jpg" alt="Founder's Workshop">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Our Journey</span>
+                <h2 class="section-title">Milestones of Excellence</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1985</div>
+                        <h3>The Foundation</h3>
+                        <p>Opens first optical boutique in Kolkata, establishing a tradition of excellence.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1995</div>
+                        <h3>Expansion & Innovation</h3>
+                        <p>Introduction of state-of-the-art optical technology and expansion of luxury brand partnerships.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2010</div>
+                        <h3>Global Recognition</h3>
+                        <p>Awarded "Best Luxury Optical Boutique" and began serving international clientele.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <h3>Digital Transformation</h3>
+                        <p>Launch of our digital platform bringing the Yours Optical experience to clients worldwide.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        </svg>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To provide exceptional eye care and premium eyewear solutions that enhance our clients' vision and confidence through personalized service, cutting-edge technology, and curated collections from the world's most prestigious designers.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To be the world's most trusted luxury optical destination, setting the standard for excellence in eye care while continuously innovating to meet the evolving needs of our sophisticated clientele.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Our Principles</span>
+                <h2 class="section-title">The Values That Guide Us</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Excellence</h3>
+                    <p>We pursue perfection in every aspect of our service, from the precision of our eye examinations to the quality of our curated collections.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Innovation</h3>
+                    <p>We embrace cutting-edge technology and stay ahead of industry trends to provide our clients with the latest advancements in eye care.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Integrity</h3>
+                    <p>We conduct our business with honesty and transparency, building lasting relationships based on trust and mutual respect.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Luxury</h3>
+                    <p>We create an exceptional experience that reflects the premium quality of our products and the sophistication of our clientele.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Experience -->
+    <section class="store-experience">
+        <div class="container">
+            <div class="experience-grid">
+                <div class="experience-gallery">
+                    <div class="gallery-grid">
+                        <div class="gallery-item large">
+                            <img src="Images/Image 2.jpg" alt="Store Interior">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Images/Image 3.jpg" alt="Display">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Images/Image 4.jpg" alt="Consultation">
+                        </div>
+                    </div>
+                </div>
+                <div class="experience-text">
+                    <span class="section-eyebrow">The Yours Optical Experience</span>
+                    <h2 class="section-title">Step Into Luxury</h2>
+                    <p>Our boutique has been thoughtfully designed to provide an intimate and sophisticated environment where you can explore our collection at your leisure.</p>
+                    <p>From the moment you enter, you'll be greeted by our knowledgeable staff who are passionate about helping you find the perfect eyewear solution. Our private consultation rooms ensure a comfortable and personalized experience, while our state-of-the-art examination equipment guarantees the most accurate vision assessment.</p>
+                    <div class="experience-features">
+                        <div class="feature">
+                            <span class="feature-icon">✓</span>
+                            <span>Private Consultation Rooms</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">✓</span>
+                            <span>State-of-the-Art Equipment</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">✓</span>
+                            <span>Expert Stylists</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">✓</span>
+                            <span>Premium Beverage Service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Meet the Experts</span>
+                <h2 class="section-title">Our Master Artisans</h2>
+                <p class="section-description">Dedicated professionals committed to your vision</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="Images/Image 26.jpg" alt="Dr. Sarah Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Sarah Johnson</h3>
+                        <span class="position">Head Optometrist</span>
+                        <p>With over 20 years of experience, Dr. Johnson leads our team with expertise in comprehensive eye care and advanced vision correction.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="Images/image 27.jpg" alt="Michael Chen">
+                    </div>
+                    <div class="member-info">
+                        <h3>Michael Chen</h3>
+                        <span class="position">Frame Stylist</span>
+                        <p>Michael brings his fashion background to help clients find frames that perfectly complement their unique style and facial features.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="Images/Image 7.jpg" alt="Emily Rodriguez">
+                    </div>
+                    <div class="member-info">
+                        <h3>Emily Rodriguez</h3>
+                        <span class="position">Optical Technician</span>
+                        <p>Emily specializes in precision lens crafting and ensures every pair meets our exacting standards for quality and comfort.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="stat-number">38</h3>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">50K+</h3>
+                    <p>Satisfied Clients</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">200+</h3>
+                    <p>Premium Brands</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">100%</h3>
+                    <p>Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>YOURS</h3>
+                    <p>Luxury eyewear atelier since 1985. Crafting visions with precision and passion.</p>
+                    <div class="footer-newsletter">
+                        <p>Subscribe to our newsletter</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">→</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="shop.html">Collection</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="blog.html">Journal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="about.html">Heritage</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="appointment.html">Consultation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Visit Us</h4>
+                    <p>27, Ratan Sarkar Garden St, Raja Katra, Bara Bazar, Jorasanko, Kolkata, West Bengal 700007</p>
+                    <p>+91 82405 02714</p>
+                    <p><a href="mailto:yoursoptical1@gmail.com">yoursoptical1@gmail.com</a></p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> 2026 YOURS OPTICAL. All rights reserved. | Website Design & Developed by <a href="https://anrasolutions.com/" target="_blank" style="color: var(--secondary); text-decoration: none;">Anra Solutions Pvt. Ltd.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
