@@ -124,131 +124,358 @@ p {
 }
 
 /* ===== CONTAINER ===== */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--space-4);
-}
-
-/* ===== NAVIGATION ===== */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 9999;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--neutral-200);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--space-4);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
     position: relative;
 }
 
-.nav-logo a {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    letter-spacing: 0.1em;
-    color: var(--primary);
+/* Fix header spacing and alignment */
+.nav-container {
+    padding: 0 32px; /* Increased padding for better spacing */
+    max-width: 1400px; /* Slightly wider for better desktop view */
+}
+
+.nav-logo .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     text-decoration: none;
-    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: auto; /* Push logo to left */
 }
 
 .nav-menu {
     display: flex;
-    gap: var(--space-5);
+    align-items: center;
+    gap: 8px;
     list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: auto; /* Center menu */
+    margin-right: 32px; /* Space before button */
 }
 
-.nav-link {
-    font-size: var(--text-sm);
-    font-weight: 500;
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 0; /* Keep actions on right */
+}
+
+/* Modern Logo with Animation */
+.nav-logo .logo-link::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    border-radius: 12px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo .logo-link:hover::before {
+    opacity: 0.1;
+}
+
+.logo-text {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--neutral-700);
-    text-decoration: none;
-    transition: color var(--transition-base);
+    transition: all 0.3s ease;
     position: relative;
 }
 
-.nav-link::after {
+.logo-subtext {
+    font-size: var(--text-xl);
+    font-weight: 300;
+    color: var(--secondary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.nav-logo .logo-link:hover .logo-text {
+    color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.nav-logo .logo-link:hover .logo-subtext {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Modern Navigation Menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--neutral-700);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--text-sm);
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-link::before {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 0;
-    height: 1px;
-    background: var(--secondary);
-    transition: width var(--transition-base);
+    height: 0;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    border-radius: 8px;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: -1;
 }
 
 .nav-link:hover {
-    color: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
 }
 
-.nav-link:hover::after {
+.nav-link:hover::before {
     width: 100%;
+    height: 100%;
 }
 
 .nav-link.active {
-    color: var(--primary);
-}
-
-.nav-link.active::after {
-    width: 100%;
-}
-
-.btn-nav {
-    background: transparent;
-    border: 2px solid var(--primary);
-    padding: 12px 28px;
-    border-radius: 40px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    color: var(--primary);
-    text-decoration: none;
-    transition: var(--transition-base);
-}
-
-.btn-nav:hover {
-    background: var(--primary);
     color: var(--white);
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    box-shadow: 0 4px 15px rgba(158, 123, 91, 0.3);
 }
 
+/* Modern Navigation Actions */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-nav-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(158, 123, 91, 0.3);
+}
+
+.btn-nav-modern::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+}
+
+.btn-nav-modern:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(158, 123, 91, 0.4);
+}
+
+.btn-nav-modern:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-nav-modern .btn-icon {
+    transition: transform 0.3s ease;
+}
+
+.btn-nav-modern:hover .btn-icon {
+    transform: rotate(15deg);
+}
+
+/* Modern Hamburger Menu */
 .hamburger {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    position: relative;
+    z-index: 10000;
 }
 
-.hamburger span {
-    width: 25px;
+.hamburger-line {
+    width: 24px;
     height: 2px;
     background: var(--primary);
-    transition: 0.3s;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
 }
 
-.hamburger.active span:nth-child(2) {
+.hamburger.active .hamburger-line:nth-child(2) {
     opacity: 0;
+    transform: translateX(20px);
 }
 
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .navbar {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    
+    .nav-container {
+        padding: 0 20px;
+        height: 70px;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        flex-direction: column;
+        gap: 0;
+        padding: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 16px 20px;
+        border-radius: 12px;
+        text-align: center;
+        font-size: var(--text-base);
+        margin-bottom: 8px;
+    }
+    
+    .nav-actions {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        padding: 0 20px 20px;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 9998;
+    }
+    
+    .nav-actions.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .btn-nav-modern {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 24px;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .logo-text {
+        font-size: var(--text-xl);
+    }
+    
+    .logo-subtext {
+        font-size: var(--text-lg);
+    }
 }
 
 /* Mobile Menu Active States */
@@ -286,7 +513,7 @@ p {
     padding-left: 15px;
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== MODERN HERO SECTION ===== */
 .hero {
     height: 100vh;
     min-height: 700px;
@@ -319,6 +546,84 @@ p {
     padding-left: var(--space-7);
     color: var(--white);
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    margin: 0 auto; /* Center the content */
+    padding-left: 64px; /* Better left padding */
+    padding-right: 64px; /* Add right padding for balance */
+}
+
+.hero-cta {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+    align-items: center; /* Better alignment */
+}
+
+/* Modern Hero Buttons */
+.btn-hero-modern {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(158, 123, 91, 0.3);
+}
+
+.btn-hero-modern::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+}
+
+.btn-hero-modern:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(158, 123, 91, 0.4);
+}
+
+.btn-hero-modern:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-hero-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    border: 2px solid var(--white);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-hero-secondary:hover {
+    background: var(--white);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
 .hero-subtitle {

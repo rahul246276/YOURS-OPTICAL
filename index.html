@@ -69,75 +69,94 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    <!-- Modern Navigation with Glassmorphism -->
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="index.html">
+                <a href="index.html" class="logo-link">
                     <span class="logo-text">YOURS</span>
                     <span class="logo-subtext">OPTICAL</span>
                 </a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="shop.html" class="nav-link">Collection</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-                <li><a href="blog.html" class="nav-link">Blog </a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="shop.html" class="nav-link" data-page="shop">Collection</a></li>
+                <li><a href="about.html" class="nav-link" data-page="about">About</a></li>
+                <li><a href="services.html" class="nav-link" data-page="services">Services</a></li>
+                <li><a href="gallery.html" class="nav-link" data-page="gallery">Gallery</a></li>
+                <li><a href="blog.html" class="nav-link" data-page="blog">Blog</a></li>
+                <li><a href="contact.html" class="nav-link" data-page="contact">Contact</a></li>
             </ul>
-            <a href="appointment.html" class="btn-nav">Book Consultation</a>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-actions">
+                <a href="appointment.html" class="btn-nav-modern">
+                    <span class="btn-text">Book Consultation</span>
+                    <span class="btn-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </span>
+                </a>
+                <div class="hamburger" id="hamburger">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Simple Static Hero Section -->
     <section class="hero" id="hero-slider">
         <div class="hero-slide active"
-            style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('Images/Image\ 26.jpg') center/cover no-repeat;">
+            style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('Images/Image\ 26.jpg') center/cover no-repeat;">
             <div class="hero-content">
-                <span class="hero-subtitle">Your Respect Is Our First Motive</span>
-                <h1 class="hero-title">Why Choose YOURS OPTICAL</h1>
-                <p class="hero-description">Leading optical shop in Bada Bazar Kolkata with advanced technology and
-                    affordable pricing. Your Vision, Our Mission since 1985.</p>
-                <a href="tel:8240502714" class="btn-hero">Call Now: 8240502714</a>
+                <span class="hero-subtitle">Your Vision, Our Mission</span>
+                <h1 class="hero-title">Premium Eyewear Since 1985</h1>
+                <p class="hero-description">Experience the finest optical care in Bada Bazar, Kolkata. We combine traditional craftsmanship with modern technology to bring you perfect vision solutions. Your trust is our first motive, and your satisfaction is our success.</p>
+                <div class="hero-cta">
+                    <a href="tel:8240502714" class="btn-hero">Call Now: 8240502714</a>
+                    <a href="appointment.html" class="btn-hero-secondary">Book Eye Testing</a>
+                </div>
             </div>
         </div>
         <div class="hero-slide"
-            style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('Images/Image 19.jpg') center/cover no-repeat;">
+            style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('Images/Image 19.jpg') center/cover no-repeat;">
             <div class="hero-content">
                 <span class="hero-subtitle">Master Craftsmanship</span>
                 <h1 class="hero-title">Timeless Elegance</h1>
-                <p class="hero-description">Handcrafted frames that blend heritage with contemporary design excellence.
-                </p>
-                <a href="shop.html" class="btn-hero">Discover More →</a>
+                <p class="hero-description">Handcrafted frames that blend heritage with contemporary design excellence. Each piece is a testament to our commitment to quality and attention to detail.</p>
+                <div class="hero-cta">
+                    <a href="shop.html" class="btn-hero">Discover Collection</a>
+                    <a href="appointment.html" class="btn-hero-secondary">Book Consultation</a>
+                </div>
             </div>
         </div>
         <div class="hero-slide"
-            style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('Images/Image\ 8.jpg') center/cover no-repeat;">
+            style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('Images/Image 8.jpg') center/cover no-repeat;">
             <div class="hero-content">
-                <span class="hero-subtitle">Premium Collection</span>
+                <span class="hero-subtitle">Advanced Technology</span>
+                <h1 class="hero-title">Precision Eye Care</h1>
+                <p class="hero-description">State-of-the-art Auto Ref technology and advanced diagnostic equipment ensure accurate prescriptions and comprehensive eye health assessments for the entire family.</p>
+                <div class="hero-cta">
+                    <a href="services.html" class="btn-hero">Our Services</a>
+                    <a href="appointment.html" class="btn-hero-secondary">Book Consultation</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide"
+            style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('Images/Image 7.jpg') center/cover no-repeat;">
+            <div class="hero-content">
+                <span class="hero-subtitle">Exclusive Collection</span>
                 <h1 class="hero-title">Luxury Redefined</h1>
-                <p class="hero-description">Experience the pinnacle of optical innovation with our exclusive designs.
-                </p>
-                <a href="shop.html" class="btn-hero">View Collection →</a>
+                <p class="hero-description">Discover our curated selection of premium frames and sunglasses from world-renowned designers. Experience the perfect blend of style, comfort, and optical excellence.</p>
+                <div class="hero-cta">
+                    <a href="shop.html" class="btn-hero">Shop Now</a>
+                    <a href="appointment.html" class="btn-hero-secondary">Book Consultation</a>
+                </div>
             </div>
         </div>
-        <div class="hero-slide"
-            style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('Images/Image 7.jpg') center/cover no-repeat;">
-            <div class="hero-content">
-                <span class="hero-subtitle">Exclusive Design</span>
-                <h1 class="hero-title">Signature Style</h1>
-                <p class="hero-description">Discover our most coveted frames that define luxury eyewear excellence.</p>
-                <a href="shop.html" class="btn-hero">Explore Now →</a>
-            </div>
-        </div>
+        
+        <!-- Simple Navigation Buttons -->
         <button class="hero-nav-btn hero-prev" onclick="changeSlide(-1)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="15 18 9 12 15 6"></polyline>
