@@ -662,6 +662,43 @@ p {
     font-family: var(--font-display);
 }
 
+.nav-logo a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: var(--text-xl);
+    font-family: var(--font-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.logo-text {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.logo-subtext {
+    font-size: var(--text-xl);
+    font-weight: 300;
+    color: var(--secondary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.nav-logo a:hover .logo-text {
+    color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.nav-logo a:hover .logo-subtext {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
 /* ===== SHOWCASE GALLERY ===== */
 .showcase {
     padding: var(--space-8) 0;
@@ -2708,6 +2745,11 @@ p {
     
     .nav-logo a {
         font-size: var(--text-lg);
+    }
+    
+    .logo-img {
+        height: 50px;
+        max-width: 220px;
     }
     
     .nav-link {
